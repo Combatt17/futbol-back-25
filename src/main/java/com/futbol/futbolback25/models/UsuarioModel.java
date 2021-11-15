@@ -10,7 +10,7 @@ public class UsuarioModel {
     private String id;
     private String nombre;
     private String correo;
-    private String usernames;
+    private String username;
     private String password;
     private String hash;
 
@@ -32,11 +32,11 @@ public class UsuarioModel {
     public void setCorreo(String correo) {
         this.correo = correo;
     }
-    public String getUsernames() {
-        return usernames;
+    public String getUsername() {
+        return username;
     }
     public void setUsernames(String usernames) {
-        this.usernames = usernames;
+        this.username = usernames;
     }
     public String getPassword() {
         return password;
