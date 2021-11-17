@@ -8,9 +8,9 @@ public class PartidoModel {
 
     @Id
     private String id;
-    private UsuarioModel usuario;
-    private EquipoModel local;
-    private EquipoModel visitante;
+    private UsuarioModel usuario; //Información del usuario
+    private EquipoModel local; //Esta es la información del equipo 1
+    private EquipoModel visitante;//Esta es la información del equipo 2
     private String fecha;
     private int goleslocal;
     private int golesvisitante;
