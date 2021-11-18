@@ -1,7 +1,7 @@
 package com.futbol.futbolback25.services;
 
 import java.util.List;
-import java.util.Optional;
+
 
 import com.futbol.futbolback25.models.PartidoModel;
 import com.futbol.futbolback25.repositories.PartidoRepository;
@@ -33,7 +33,7 @@ public class PartidoService {
       return  this.partidoRepository.findById(id).orElse(new PartidoModel());
     }
 
-    
+
 
 
 }
