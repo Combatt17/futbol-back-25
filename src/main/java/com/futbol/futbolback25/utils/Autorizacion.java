@@ -7,6 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Component;
 
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
+import io.jsonwebtoken.Jwts;
+
 @Component
 public class Autorizacion implements Filter {
     
@@ -22,8 +26,26 @@ public class Autorizacion implements Filter {
                 // http://localhost:8080/
                 
                 String url =httpServletRequest.getRequestURI();
-                if(url.contains("/api/partidos")||url.contains("/api/usuarios/login")||url.contains("index")){
+                if(url.contains("/api/usuarios")||url.contains("/api/usuarios/login")||url.contains("index")){
                     chain.doFilter(request, response); 
+                }else{
+                    String hash=httpServletRequest.getHeader("Authorization");
+                    if(hash==null || hash.trim().equals("")){
+                        response.setContentType("application/json");
+                        String body="{\"autorizacion\":\"NO\"}";
+                        response.getWriter().write(body);
+                    }
+                    try {
+                        Jws<Claims> claims=Jwts.parser().setSigningKey(KEY).parseClaimsJws(hash);
+                        if((url.contains("/api/equipos")||url.contains("/api/partidos"))&&(!claims.getBody().get("username").equals(""))){
+                            chain.doFilter(request, response);    
+                        }
+
+                    } catch (Exception e) {
+                        response.setContentType("application/json");
+                        String body="{\"autorizacion\":\"TOKEN NO VALIDO\"}";
+                        response.getWriter().write(body);
+                    }
                 }
 
 
