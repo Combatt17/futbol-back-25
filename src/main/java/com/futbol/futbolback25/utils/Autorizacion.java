@@ -5,13 +5,13 @@ import java.io.IOException;
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.stereotype.Component;
+
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 
-@Component
+//@Component
 public class Autorizacion implements Filter {
     
     //Clave para codifica y decodificar
