@@ -13,6 +13,7 @@ import com.futbol.futbolback25.utils.BCrypt;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,6 +24,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
 @RestController
+@CrossOrigin(origins = "*") // Permitir origen de petición
 @RequestMapping("/api")
 public class UsuarioController {
     
