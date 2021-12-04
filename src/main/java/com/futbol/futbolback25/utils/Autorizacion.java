@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Component;
 
@@ -23,8 +24,13 @@ public class Autorizacion implements Filter {
        
                 //Obtener el path principal 
                 HttpServletRequest httpServletRequest=(HttpServletRequest) request;
-                // http://localhost:8080/
                 
+                HttpServletResponse httpServletResponse=(HttpServletResponse) response;
+                httpServletResponse.setHeader("Access-Control-Allow-Origin", "*");
+                httpServletResponse.setHeader("Access-Control-Allow-Headers", "Authorization");
+
+
+                // http://localhost:8080/
                 String url =httpServletRequest.getRequestURI();
                 if(url.contains("/api/usuarios")||url.contains("/api/usuarios/login")||url.contains("index")){
                     chain.doFilter(request, response); 
