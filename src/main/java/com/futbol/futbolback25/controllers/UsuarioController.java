@@ -14,6 +14,7 @@ import com.futbol.futbolback25.utils.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,7 +32,15 @@ public class UsuarioController {
     @Autowired
     UsuarioService usuarioService;
 
-   
+   /* *
+   Crear un método get para verificar la validez del token
+   */
+  @GetMapping("/verificar") //Ruta para acceder al método
+  public ResponseEntity<Map<String, Boolean>> verificarToken(){ // "{"ok": true}"
+      Map<String, Boolean> respuesta = new HashMap<>();
+      respuesta.put("ok",true);
+      return ResponseEntity.ok(respuesta);
+  }
 
     //Método para registrar a un usuario
     //Definimos el método de la petición HTTP Post
@@ -84,6 +93,10 @@ public class UsuarioController {
                 usuarioAux.setHash(hash);
                 respuesta.put("mensaje","Accedió correctamente");
                 respuesta.put("token",hash);
+                respuesta.put("id",usuarioAux.getId());
+                respuesta.put("nombre",usuarioAux.getNombre());
+                respuesta.put("correo",usuarioAux.getCorreo());
+                respuesta.put("username",usuarioAux.getUsername());
             }
         }
         return ResponseEntity.ok(respuesta);
